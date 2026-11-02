@@ -14,8 +14,7 @@ jobs:
 
       - name: Select Xcode 26
         run: |
-          ls /Applications | grep -i xcode
-          sudo xcode-select -s /Applications/Xcode*.app/Contents/Developer
+          sudo xcode-select -s "/Applications/Xcode.app/Contents/Developer"
           xcodebuild -version
 
       - name: Install xcodegen
