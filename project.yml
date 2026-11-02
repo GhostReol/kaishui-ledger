@@ -1,0 +1,50 @@
+name: KaiShuiLedger
+options:
+  bundleIdPrefix: com.kaishui
+  deploymentTarget:
+    iOS: "16.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    CODE_SIGN_STYLE: Automatic
+targets:
+  KaiShuiLedger:
+    type: application
+    platform: iOS
+    sources:
+      - path: Sources
+    entitlements:
+      path: Support/KaiShuiLedger.entitlements
+    info:
+      path: Support/App-Info.plist
+      properties:
+        CFBundleDisplayName: 开水记账
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+    dependencies:
+      - target: LedgerWidget
+    settings:
+      base:
+        TARGETED_DEVICE_FAMILY: "1"
+        PRODUCT_BUNDLE_IDENTIFIER: com.kaishui.ledger
+  LedgerWidget:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: Widget
+      - path: Sources/Shared
+    entitlements:
+      path: Support/LedgerWidget.entitlements
+    info:
+      path: Support/Widget-Info.plist
+      properties:
+        CFBundleDisplayName: 开水记账小组件
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    settings:
+      base:
+        TARGETED_DEVICE_FAMILY: "1"
+        PRODUCT_BUNDLE_IDENTIFIER: com.kaishui.ledger.widget
+        SKIP_INSTALL: YES
